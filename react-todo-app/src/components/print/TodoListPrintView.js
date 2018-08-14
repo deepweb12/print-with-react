@@ -1,16 +1,23 @@
 import React from 'react';
 
-const style = require("./TodoListPrintView.less");
+const styles = require('./TodoListPrintView.print.less');
 
 export default function TodoListPrintView(props) {
     const {items} = props;
 
     return (
-        <div className={style.container}>
-            <h1 className={style.header}>Things to do</h1>
-            <div>{items.map(renderTodo)}</div>
+        <div>
+            {renderStyles()}
+            <div className="container">
+                <h1 className="header">Things to do</h1>
+                <div>{items.map(renderTodo)}</div>
+            </div>
         </div>
     );
+}
+
+function renderStyles() {
+    return <style>{styles}</style>
 }
 
 function renderTodo(item) {

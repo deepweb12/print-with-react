@@ -20,7 +20,13 @@ module.exports = {
             },
             {
                 test: /\.less$/,
+                exclude: /\.print\.less$/,
                 use: ['style-loader', 'css-loader', 'less-loader'],
+            },
+            {
+                test: /\.less$/,
+                include: /\.print\.less$/,
+                use: ['css-to-string-loader', 'css-loader', 'less-loader'],
             },
             {
                 test: /\.(png|svg|ttf|woff|woff2|eot)$/,
