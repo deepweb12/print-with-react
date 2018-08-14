@@ -18,7 +18,7 @@ class StateProvider extends Component {
     render() {
         let children = wrapChildrenWith(this.props.children, {
             data: this.state,
-            actions: objectWithOnly(this, ['addNew', 'changeFilter', 'changeStatus', 'changeMode', 'setSearchQuery'])
+            actions: objectWithOnly(this, ['addNew', 'changeFilter', 'changeStatus', 'changeMode', 'print', 'setSearchQuery'])
         });
 
         return <div>{children}</div>;
@@ -42,6 +42,10 @@ class StateProvider extends Component {
 
     changeMode(mode = MODE_NONE) {
         this.setState({mode});
+    }
+
+    print() {
+        alert('print!');
     }
 
     setSearchQuery(text) {
