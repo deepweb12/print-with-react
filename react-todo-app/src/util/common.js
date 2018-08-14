@@ -1,4 +1,5 @@
 import React from 'react';
+import {render} from 'react-dom'
 
 /**
  * Returns a new object with only few attributes of the original object.
@@ -34,4 +35,19 @@ export function wrapChildrenWith(children, props) {
  */
 export function stringInclues(str, substr) {
     return str.indexOf(substr) !== -1;
+}
+
+/**
+ * Print react component in new frame
+ * @param {ReactComponent} reactComponent
+ */
+export function print(reactComponent) {
+    const frame = document.createElement('iframe');
+    frame.style.display = 'none';
+    window.document.body.appendChild(frame);
+    const _window = frame.contentWindow;
+    _window.document.body.appendChild(_window.document.createElement('div'));
+    render(reactComponent, _window.document.body.children[0]);
+    _window.print();
+    window.document.body.removeChild(frame);
 }

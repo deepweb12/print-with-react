@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {FILTER_ALL} from '../../services/filter';
 import {MODE_CREATE, MODE_NONE} from '../../services/mode';
-import {objectWithOnly, wrapChildrenWith} from '../../util/common';
+import {objectWithOnly, wrapChildrenWith, print} from '../../util/common';
 import {getAll, addToList, updateStatus} from '../../services/todo';
 
 class StateProvider extends Component {
@@ -45,7 +45,13 @@ class StateProvider extends Component {
     }
 
     print() {
-        alert('print!');
+        print(
+            <div>
+                <ol>
+                    {this.state.list.map(t => <li key={t.id}>{t.text}</li>)}
+                </ol>
+            </div>
+        );
     }
 
     setSearchQuery(text) {
