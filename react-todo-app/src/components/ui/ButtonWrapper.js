@@ -2,7 +2,7 @@ import React from 'react';
 import {MODE_NONE, MODE_CREATE, MODE_SEARCH} from '../../services/mode';
 
 export default function ButtonWrapper(props) {
-    const {mode, changeMode, print} = props;
+    const {mode, changeMode, onPrint} = props;
     const isCreateMode = () => mode === MODE_CREATE;
     const isSearchMode = () => mode === MODE_SEARCH;
 
@@ -16,7 +16,7 @@ export default function ButtonWrapper(props) {
                 onClick={() => changeMode(isSearchMode() ? MODE_NONE : MODE_SEARCH)}></a>
             <a title="Print"
                className={'button print'}
-               onClick={() => print()}></a>
+               onClick={() => onPrint()}></a>
         </div>
     );
 }

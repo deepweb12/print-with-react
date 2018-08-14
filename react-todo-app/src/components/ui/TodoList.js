@@ -17,7 +17,7 @@ export default function TodoList(props) {
                 <div className="todolist">
                     <Header {...{addNew, mode, query, setSearchQuery}}/>
                     <FilteredList {...{items, changeStatus}}/>
-                    <Footer {...{count, filter, changeFilter, mode, changeMode, print}}/>
+                    <Footer {...{count, filter, changeFilter, mode, changeMode, onPrint: () => print(items)}}/>
                     <Info {...{mode}}/>
                 </div>
             </div>

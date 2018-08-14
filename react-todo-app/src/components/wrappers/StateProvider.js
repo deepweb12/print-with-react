@@ -3,6 +3,7 @@ import {FILTER_ALL} from '../../services/filter';
 import {MODE_CREATE, MODE_NONE} from '../../services/mode';
 import {objectWithOnly, wrapChildrenWith, print} from '../../util/common';
 import {getAll, addToList, updateStatus} from '../../services/todo';
+import TodoListPrintView from "../print/TodoListPrintView";
 
 class StateProvider extends Component {
     constructor() {
@@ -44,14 +45,8 @@ class StateProvider extends Component {
         this.setState({mode});
     }
 
-    print() {
-        print(
-            <div>
-                <ol>
-                    {this.state.list.map(t => <li key={t.id}>{t.text}</li>)}
-                </ol>
-            </div>
-        );
+    print(items) {
+        print(<TodoListPrintView {...{items}} />);
     }
 
     setSearchQuery(text) {
