@@ -44,7 +44,7 @@
 
 # Печать с помощью React
 
-<p style="text-align: center;"><a href="https://github.com/kontur-courses/react" style="text-decoration:line-through">https://github.com/kontur-courses/<b>react</b></a></p>
+<p style="text-align: center;"><a href="https://github.com/vanyaraspopov/print-with-react">https://github.com/vanyaraspopov/print-with-react</a></p>
 
 </script></section>
 
@@ -74,6 +74,87 @@
 0. Рендерим компонент в этот фрейм
 0. Вызываем print у фрейма
 0. PROFIT!
+
+правда, есть проблема с подключением стилей
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+### Реализация
+
+Функция печати
+
+```js
+import React from 'react';
+import {render} from 'react-dom';
+
+export function print(reactComponent) {
+    const frame = document.createElement('iframe');
+    frame.style.display = 'none';
+    window.document.body.appendChild(frame);
+    const _window = frame.contentWindow;
+    _window.document.body.appendChild(_window.document.createElement('div'));
+    render(reactComponent, _window.document.body.children[0]);
+    _window.print();
+    window.document.body.removeChild(frame);
+}
+
+
+```
+
+***
+
+Код компонента печатной формы
+
+```js
+import React from 'react';
+
+const css = require('./TodoListPrintView.print.less');
+
+export default function TodoListPrintView(props) {
+  const {items} = props;
+
+  return (
+    <div>
+      <style>{css}</style>
+      <div className="container">
+        <h1 className="header">Things to do</h1>
+        <div className="wrapper">
+          {items.map(todo =>
+            <div key={todo.id} className="row">
+              <div className={"column__check"}>{/**/}</div>
+              <div className={"column"}>{todo.text}</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+- в переменной `css` содержатся стили компонента
+- компонент рендерит стили в теге `style`
+
+***
+
+Правила в конфигурации webpack
+
+```js
+{
+  test: /\.less$/,
+  exclude: /\.print\.less$/,
+  use: ['style-loader', 'css-loader', 'less-loader'],
+},
+{
+  test: /\.less$/,
+  include: /\.print\.less$/,
+  use: ['css-to-string-loader', 'css-loader', 'less-loader'],
+},
+```
+
+стили, которые должны быть преобразованы в строку, обозначаются суффиксом `.print`
 
 </script></section>
 
