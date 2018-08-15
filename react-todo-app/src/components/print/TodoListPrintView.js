@@ -7,19 +7,18 @@ export default function TodoListPrintView(props) {
 
     return (
         <div>
-            {renderStyles()}
+            <style>{styles}</style>
             <div className="container">
                 <h1 className="header">Things to do</h1>
-                <div>{items.map(renderTodo)}</div>
+                <div className="wrapper">
+                    {items.map(todo =>
+                        <div key={todo.id} className="row">
+                            <div className={"column__check"}>{/**/}</div>
+                            <div className={"column"}>{todo.text}</div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
-}
-
-function renderStyles() {
-    return <style>{styles}</style>
-}
-
-function renderTodo(item) {
-    return <li key={item.id}>{item.text}</li>;
 }

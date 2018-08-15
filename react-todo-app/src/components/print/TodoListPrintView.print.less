@@ -1,8 +1,45 @@
+@color-light-blue: #deeaf6;
+@color-blue: #9cc2e5;
+@color-dark-blue: #2f5496;
+@row-height: 40px;
+
 .container {
-  font-family: Arial sans-serif;
-  font-size: 16px;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 16pt;
+  font-style: italic;
 }
 
 .header {
+  color: @color-dark-blue;
+  font-family: "Calibri Light", Calibri, Arial, sans-serif;
+  font-size: 16pt;
+  font-style: normal;
   text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.row {
+  border-bottom: 1px solid @color-blue;
+  &:first-child {
+    border-top: 3px solid @color-blue;
+  }
+  &:last-child {
+    border-bottom: 2px solid @color-blue;
+  }
+}
+
+.column {
+  display: inline-block;
+  padding: 10px;
+  min-height: @row-height;
+  vertical-align: top;
+}
+
+.column__check:extend(.column) {
+  width: @row-height;
+  border-right: 1px solid @color-blue;
+}
+
+@page {
+  margin: 1.27cm;
 }
