@@ -34,7 +34,7 @@
         }
     </style>
 
-	<title>Печать с помощью React</title>
+	<title>Печать документов</title>
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 
 <section data-markdown><script type="text/template">
 
-# Печать с помощью React
+# Печать документов
 
 <p style="text-align: center;"><a href="https://github.com/vanyaraspopov/print-with-react">https://github.com/vanyaraspopov/print-with-react</a></p>
 
@@ -67,6 +67,58 @@
 
 <section data-markdown><script type="text/template">
 
+### Простое решение
+
+Можно использовать css медиа-запрос `print`
+
+```css
+@media print {
+  ...
+}
+```
+
+переопределить в нём все классы, приведя страницу к виду прототипа, и вызвать метод
+
+```js
+window.print()
+```
+
+<span class="fragment fade-in">⚠️ это может быть очень трудоёмко</span>
+<span class="fragment fade-in">⚠️ возможны конфликты стилей</span>
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+### Реальный случай
+
+Информация, которую нужно напечатать, тянется с сервера и показывается в модальном окне
+<img src="assets/modal.png" alt="modal" height="500">
+
+***
+
+
+<div style="text-align: left; float: left;">
+  <img src="assets/prototype.png" alt="prototype" height="600">
+</div>
+
+<div style="text-align: left; float: right;">
+  <p data-markdown>
+    Прототип печатной формы
+  </p>
+  <span class="fragment fade-in">можно попробовать
+    `visibility: hidden` для всего,
+    кроме печатной формы</span>
+
+  <span class="fragment fade-in">⚠️ проблемы с box size</span>
+  <span class="fragment fade-in">⚠️ по-прежнему возможны
+    конфликты стилей</span>
+</div>
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
 ### Решение
 
 0. Для печатной формы документа создаём React-компонент, который содержит логику отображения документа
@@ -75,7 +127,7 @@
 0. Вызываем print у фрейма
 0. PROFIT!
 
-правда, есть проблема с подключением стилей
+<span class="fragment fade-in">⚠️ есть проблемы с подключением стилей )</span>
 
 </script></section>
 
@@ -92,12 +144,12 @@ import {render} from 'react-dom';
 export function print(reactComponent) {
     const frame = document.createElement('iframe');
     frame.style.display = 'none';
-    window.document.body.appendChild(frame);
+    document.body.appendChild(frame);
     const _window = frame.contentWindow;
     _window.document.body.appendChild(_window.document.createElement('div'));
     render(reactComponent, _window.document.body.children[0]);
     _window.print();
-    window.document.body.removeChild(frame);
+    document.body.removeChild(frame);
 }
 
 
@@ -113,21 +165,11 @@ import React from 'react';
 const css = require('./TodoListPrintView.print.less');
 
 export default function TodoListPrintView(props) {
-  const {items} = props;
-
   return (
     <div>
       <style>{css}</style>
       <div className="container">
-        <h1 className="header">Things to do</h1>
-        <div className="wrapper">
-          {items.map(todo =>
-            <div key={todo.id} className="row">
-              <div className={"column__check"}>{/**/}</div>
-              <div className={"column"}>{todo.text}</div>
-            </div>
-          )}
-        </div>
+        ...
       </div>
     </div>
   );
