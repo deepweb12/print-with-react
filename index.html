@@ -157,6 +157,50 @@ export function print(reactComponent) {
 
 ***
 
+Пишем стили в компоненте внутри тега `style`
+
+```js
+import React from 'react';
+
+export default function TodoListPrintView(props) {
+  return (
+    <div>
+      <style>
+        .container {
+          ...
+        }
+      </style>
+      <div className="container">
+        ...
+      </div>
+    </div>
+  );
+}
+```
+<span class="fragment fade-in">:( хочется подсветки синтаксиса</span>
+<span class="fragment fade-in">:( хочется использовать препроцессоры</span>
+
+***
+
+Правила в конфигурации webpack
+
+```js
+{
+  test: /\.less$/,
+  exclude: /\.print\.less$/,
+  use: ['style-loader', 'css-loader', 'less-loader'],
+},
+{
+  test: /\.less$/,
+  include: /\.print\.less$/,
+  use: ['css-to-string-loader', 'css-loader', 'less-loader'],
+},
+```
+
+стили, которые должны быть преобразованы в строку, обозначаются суффиксом `.print`
+
+***
+
 Код компонента печатной формы
 
 ```js
@@ -177,26 +221,7 @@ export default function TodoListPrintView(props) {
 ```
 
 - в переменной `css` содержатся стили компонента
-- компонент рендерит стили в теге `style`
-
-***
-
-Правила в конфигурации webpack
-
-```js
-{
-  test: /\.less$/,
-  exclude: /\.print\.less$/,
-  use: ['style-loader', 'css-loader', 'less-loader'],
-},
-{
-  test: /\.less$/,
-  include: /\.print\.less$/,
-  use: ['css-to-string-loader', 'css-loader', 'less-loader'],
-},
-```
-
-стили, которые должны быть преобразованы в строку, обозначаются суффиксом `.print`
+- полная изоляция стилей
 
 </script></section>
 
