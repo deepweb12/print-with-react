@@ -142,12 +142,12 @@ So you've created a React component but would love to give end users the ability
 
 `npm install react-to-print --save-dev `
 
-<span class="fragment fade-in">⚠️ остаётся проблема конфликтов стилей</span>
+<span class="fragment fade-in">⚠️ остаётся проблема конфликтов с глобальными стилями</span>
+<span class="fragment fade-in">⚠️ нам не нужны все стили родительского окна</span>
 
 </script></section>
 
-
-  <section data-markdown><script type="text/template">
+<section data-markdown><script type="text/template">
 
 ### Реализация
 
@@ -181,11 +181,11 @@ import React from 'react';
 export default function TodoListPrintView(props) {
   return (
     <div>
-      <style>
+      <style>{`
         .container {
           ...
         }
-      </style>
+      `}</style>
       <div className="container">
         ...
       </div>
@@ -238,6 +238,18 @@ export default function TodoListPrintView(props) {
 
 - в переменной `css` содержатся стили компонента
 - полная изоляция стилей
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+
+## Спасибо за внимание
+
+Ссылки
+- презентация <a href="https://github.com/vanyaraspopov/print-with-react">https://github.com/vanyaraspopov/print-with-react</a>
+- ReactToPrint <a href="https://github.com/gregnb/react-to-print">https://github.com/gregnb/react-to-print</a>
+- webpack-загрузчик стилей в виде строки
+<a href="https://www.npmjs.com/package/css-to-string-loader">https://www.npmjs.com/package/css-to-string-loader</a>
 
 </script></section>
 
