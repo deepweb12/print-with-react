@@ -16,3 +16,4 @@
 0. ```cd print-with-react/react-todo-app```
 0. ```npm i```
 0. ```npm run start```
+0. open `http://localhost:8080/`
