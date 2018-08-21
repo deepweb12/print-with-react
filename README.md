@@ -13,6 +13,6 @@
 
 ### Запуск демо
 1. ```git clone https://github.com/vanyaraspopov/print-with-react```
-0. ```cd react-todo-app```
+0. ```cd print-with-react/react-todo-app```
 0. ```npm i```
 0. ```npm run start```
