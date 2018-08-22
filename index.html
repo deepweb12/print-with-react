@@ -83,9 +83,6 @@
 window.print()
 ```
 
-<span class="fragment fade-in">⚠️ это может быть очень трудоёмко</span>
-<span class="fragment fade-in">⚠️ возможны конфликты стилей</span>
-
 </script></section>
 
 <section data-markdown><script type="text/template">
@@ -111,8 +108,7 @@ window.print()
     кроме печатной формы</span>
 
   <span class="fragment fade-in">⚠️ проблемы с box size</span>
-  <span class="fragment fade-in">⚠️ по-прежнему возможны
-    конфликты стилей</span>
+  <span class="fragment fade-in">⚠️ возможны конфликты стилей</span>
 </div>
 
 </script></section>
@@ -127,7 +123,7 @@ window.print()
 0. Вызываем print у фрейма
 0. PROFIT!
 
-<span class="fragment fade-in">⚠️ есть проблемы с подключением стилей )</span>
+<span class="fragment fade-in">⚠️ есть проблемы с подключением стилей</span>
 
 </script></section>
 
@@ -142,8 +138,33 @@ So you've created a React component but would love to give end users the ability
 
 `npm install react-to-print --save-dev `
 
-<span class="fragment fade-in">⚠️ остаётся проблема конфликтов с глобальными стилями</span>
-<span class="fragment fade-in">⚠️ нам не нужны все стили родительского окна</span>
+***
+
+### Использование ReactToPrint
+
+```js
+class Example extends React.Component {
+  render() {
+    return (
+      <div>
+        <ReactToPrint
+            trigger={() => <a href="#">Печать</a>}
+            content={() => this.componentRef}
+        />
+        <TodoListPrintView ref={el => (this.componentRef = el)} />
+      </div>
+    );
+  }
+}
+```
+
+***
+
+Проблемы
+
+0. остутствует интерфейс для вызова функции печати
+0. нам не нужны все стили родительского окна
+0. конфликты с глобальными стилями
 
 </script></section>
 
@@ -154,7 +175,6 @@ So you've created a React component but would love to give end users the ability
 Функция печати
 
 ```js
-import React from 'react';
 import {render} from 'react-dom';
 
 export function print(reactComponent) {
@@ -193,8 +213,8 @@ export default function TodoListPrintView(props) {
   );
 }
 ```
-<span class="fragment fade-in">:( хочется подсветки синтаксиса</span>
-<span class="fragment fade-in">:( хочется использовать препроцессоры</span>
+<span class="fragment fade-in">🙁 хочется подсветки синтаксиса</span>
+<span class="fragment fade-in">🙁 хочется использовать препроцессоры</span>
 
 ***
 
