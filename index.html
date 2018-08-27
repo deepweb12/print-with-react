@@ -16,24 +16,6 @@
 	<script defer src="reveal/initialize.js"></script>
 	<script defer src="reveal/js/d3.min.js"></script>
 
-    <style>
-		.fragment-container {
-			position: relative;
-		}
-
-		.fragment-container .fragment {
-			position: absolute;
-			top: 0px;
-			width: 100%;
-		}
-
-        .tools.tools {
-          margin: -30% auto 0;
-          height: 100vh;
-          display: block;
-        }
-    </style>
-
 	<title>Печать документов</title>
 </head>
 <body>
@@ -130,11 +112,13 @@ window.print()
 <section data-markdown><script type="text/template">
 
 <a href="https://github.com/gregnb/react-to-print">https://github.com/gregnb/react-to-print</a>
-### ReactToPrint - Print React components in the browser
+### ReactToPrint
 
-So you've created a React component but would love to give end users the ability to print out the contents of that component. This package aims to solve that by popping up a new print window with CSS styles copied over as well.
+- Этот компонент служит обёрткой для компонента, который нужно напечатать.
+- При нажатии на кнопку создаётся элемент `iframe`, в котором рендерится печатаемый компонент.
+- Все стили родительского окна копируются в этот фрейм.
 
-### Install
+### Установка
 
 `npm install react-to-print --save-dev `
 
@@ -162,7 +146,6 @@ class Example extends React.Component {
 
 Проблемы
 
-0. остутствует интерфейс для вызова функции печати
 0. нам не нужны все стили родительского окна
 0. конфликты с глобальными стилями
 
